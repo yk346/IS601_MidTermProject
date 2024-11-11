@@ -5,14 +5,12 @@ import pytest
 from unittest.mock import Mock, patch, PropertyMock
 from decimal import Decimal
 from tempfile import TemporaryDirectory
-from app.calculator import Calculator, calculator_repl
+from app.calculator import Calculator
+from app.calculator_repl import calculator_repl
 from app.calculator_config import CalculatorConfig
 from app.exceptions import OperationError, ValidationError
 from app.history import LoggingObserver, AutoSaveObserver
-from app.input_validators import InputValidator
 from app.operations import OperationFactory
-from app.calculation import Calculation
-from app.calculator import CalculatorMemento
 
 # Fixture to initialize Calculator with a temporary directory for file paths
 @pytest.fixture

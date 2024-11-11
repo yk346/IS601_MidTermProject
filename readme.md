@@ -1,27 +1,12 @@
-# Calculator Program
+# Module 5: Advanced Design Patterns and Data Management with pandas in Python
 
-This repository provides a feature-rich calculator program written in Python, designed to demonstrate principles of object-oriented programming (OOP), error handling, and software configuration. The calculator supports various arithmetic operations and is containerized for easy deployment. 
-
----
-
-## Features
-
-- **Operations Supported**:
-  - Addition, Subtraction, Multiplication, Division
-  - Power, Root operations with error handling
-- **Advanced Configuration**:
-  - Customizable settings like precision, history size, and max input values, configured through environment variables or fallback defaults.
-- **Persistence**:
-  - Calculation history can be saved and loaded, with directories and file paths configured dynamically.
-- **Validation & Error Handling**:
-  - Input validation and descriptive error messages for invalid configurations and operations.
-
+[module contents](module_contents.md)
 ## Installation
 
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/calculator.git
+   git clone https://github.com/kaw393939/module5_is601.git
    cd calculator
    ```
 

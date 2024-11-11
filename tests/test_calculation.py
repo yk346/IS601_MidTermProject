@@ -3,6 +3,7 @@ from decimal import Decimal
 from datetime import datetime
 from app.calculation import Calculation
 from app.exceptions import OperationError
+import logging
 
 
 def test_addition():
@@ -106,3 +107,26 @@ def test_equality():
     calc3 = Calculation(operation="Subtraction", operand1=Decimal("5"), operand2=Decimal("3"))
     assert calc1 == calc2
     assert calc1 != calc3
+
+
+# New Test to Cover Logging Warning
+def test_from_dict_result_mismatch(caplog):
+    """
+    Test the from_dict method to ensure it logs a warning when the saved result
+    does not match the computed result.
+    """
+    # Arrange
+    data = {
+        "operation": "Addition",
+        "operand1": "2",
+        "operand2": "3",
+        "result": "10",  # Incorrect result to trigger logging.warning
+        "timestamp": datetime.now().isoformat()
+    }
+
+    # Act
+    with caplog.at_level(logging.WARNING):
+        calc = Calculation.from_dict(data)
+
+    # Assert
+    assert "Loaded calculation result 10 differs from computed result 5" in caplog.text
