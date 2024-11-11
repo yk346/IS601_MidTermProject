@@ -1,35 +1,3 @@
-Certainly! Let's review your code to identify all the design patterns you are utilizing and update your **Module 5** overview accordingly. Based on the provided code, the following design patterns are being implemented:
-
-1. **Factory Pattern**
-2. **Observer Pattern**
-3. **Memento Pattern**
-4. **Strategy Pattern**
-5. **Facade Pattern**
-
-### **1. Factory Pattern**
-- **Location:** `app/operations.py`
-- **Description:** The `OperationFactory` class is responsible for creating instances of various operation classes (`Addition`, `Subtraction`, `Multiplication`, `Division`, `Power`, `Root`) based on the user input. This encapsulates the instantiation logic and promotes scalability by allowing easy addition of new operations.
-
-### **2. Observer Pattern**
-- **Location:** `app/history.py`
-- **Description:** The `HistoryObserver` abstract base class and its concrete implementations (`LoggingObserver`, `AutoSaveObserver`) allow the `Calculator` class to notify observers about new calculations. This decouples the calculator's core functionality from secondary responsibilities like logging and auto-saving.
-
-### **3. Memento Pattern**
-- **Location:** `app/calculator_memento.py`
-- **Description:** The `CalculatorMemento` class captures and stores the state of the `Calculator` (i.e., its history) to enable undo and redo functionality. This allows the application to restore previous states without exposing the internal representation.
-
-### **4. Strategy Pattern**
-- **Location:** `app/operations.py` and `app/calculator.py`
-- **Description:** The `Operation` abstract base class and its concrete implementations (`Addition`, `Subtraction`, etc.) define a family of algorithms that the `Calculator` can use interchangeably. The `Calculator` sets the current strategy (`operation_strategy`) to perform calculations, allowing for flexible and dynamic operation selection.
-
-### **5. Facade Pattern**
-- **Location:** `app/calculator.py`
-- **Description:** The `Calculator` class serves as a facade by providing a simplified interface to various subsystems such as configuration management, operation strategies, observers, and data management with `pandas`. This hides the complexity of these subsystems from the user interface (`calculator_repl.py`), promoting ease of use and maintainability.
-
----
-
-Based on this analysis, here's the updated **Module 5** overview incorporating all identified design patterns and the integration of the `pandas` library:
-
 # Module 5: Advanced Design Patterns and Data Management with pandas in Python
 
 ## Module Overview
@@ -155,7 +123,16 @@ Your **primary textbook** for this module is the provided codebase. Each Python 
      - Strategy pattern for interchangeable operation execution
      - Extension of operations with new functionality
 
-**Supplementary Articles:**
+
+### Watch
+
+Engage with the following instructional videos to reinforce the concepts covered in the codebase and readings:
+
+ADD VIDEO
+
+### Review
+
+Utilize the following cheat sheets as quick references to aid your study and project development:
 To enhance your understanding of the codebase, please read the following articles:
 1. **[Design Patterns in Python](https://refactoring.guru/design-patterns/python)**
 2. **[Observer Pattern Explained](https://realpython.com/python-observer-pattern/)**
@@ -164,55 +141,8 @@ To enhance your understanding of the codebase, please read the following article
 5. **[Facade Design Pattern in Python](https://refactoring.guru/design-patterns/facade/python/example)**
 6. **[Mastering pandas for Data Analysis](https://realpython.com/pandas-python-explore-dataset/)**
 7. **[Factory Design Pattern in Python](https://refactoring.guru/design-patterns/factory-method/python/example)**
-8. **[Effective Error Handling in Python](https://realpython.com/python-exceptions/)**
-9. **[Environment Variables and Configuration Management](https://realpython.com/python-dotenv/)**
-10. **[Comprehensive Guide to Testing in Python with pytest](https://realpython.com/pytest-python-testing/)**
-11. **[Achieving 100% Test Coverage in Python - Reference Manual on Coverage](https://pytest-cov.readthedocs.io/en/latest/)**
-12. **[DRY (Don't Repeat Yourself) Principle in Python](https://www.makeuseof.com/python-dry-principle/)**
 
-### Watch
-
-Engage with the following instructional videos to reinforce the concepts covered in the codebase and readings:
-
-1. **Video: "Advanced Design Patterns in Python" (25 minutes)**
-   - **Purpose:** Explore advanced design patterns such as Observer, Memento, Strategy, Factory, and Facade, and understand their implementation in Python.
-2. **Video: "Data Management with pandas" (20 minutes)**
-   - **Purpose:** Learn how to utilize the `pandas` library for efficient data handling and manipulation within Python applications.
-3. **Video: "Implementing the Observer Pattern" (15 minutes)**
-   - **Purpose:** Understand the Observer pattern and its practical applications in monitoring and reacting to events.
-4. **Video: "Memento Pattern for Undo/Redo Functionality" (15 minutes)**
-   - **Purpose:** Discover how to implement the Memento pattern to enable state preservation and restoration in applications.
-5. **Video: "Strategy Pattern for Flexible Operations" (15 minutes)**
-   - **Purpose:** Learn how to implement the Strategy pattern to allow interchangeable operation execution strategies.
-6. **Video: "Facade Pattern for Simplified Interfaces" (15 minutes)**
-   - **Purpose:** Understand how to implement the Facade pattern to provide simplified interfaces to complex subsystems.
-7. **Video: "Testing Advanced Python Applications with pytest" (20 minutes)**
-   - **Purpose:** Learn how to write comprehensive tests for applications utilizing advanced design patterns and data management techniques.
-
-### Review
-
-Utilize the following cheat sheets as quick references to aid your study and project development:
-
-1. **[Advanced Design Patterns Cheat Sheet](https://refactoring.guru/design-patterns/python)**
-   - **Purpose:** Offers a quick reference for implementing advanced design patterns in Python.
-2. **[pandas Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)**
-   - **Purpose:** Provides essential commands and functions for data manipulation with `pandas`.
-3. **[pytest Cheat Sheet](https://realpython.com/python-pytest/)**
-   - **Purpose:** Essential commands and configurations for writing and running tests with `pytest`.
-4. **[Factory Design Pattern Cheat Sheet](https://refactoring.guru/design-patterns/factory-method/python/example)**
-   - **Purpose:** Quick reference for implementing the Factory design pattern in Python.
-5. **[Observer Design Pattern Cheat Sheet](https://refactoring.guru/design-patterns/observer/python/example)**
-   - **Purpose:** Quick reference for implementing the Observer design pattern in Python.
-6. **[Memento Design Pattern Cheat Sheet](https://refactoring.guru/design-patterns/memento/python/example)**
-   - **Purpose:** Quick reference for implementing the Memento design pattern in Python.
-7. **[Strategy Design Pattern Cheat Sheet](https://refactoring.guru/design-patterns/strategy/python/example)**
-   - **Purpose:** Quick reference for implementing the Strategy design pattern in Python.
-8. **[Facade Design Pattern Cheat Sheet](https://refactoring.guru/design-patterns/facade/python/example)**
-   - **Purpose:** Quick reference for implementing the Facade design pattern in Python.
-9. **[Error Handling Cheat Sheet](https://www.pythonsheets.com/notes/python-exceptions.html)**
-   - **Purpose:** Comprehensive guide to Python's error handling mechanisms.
-10. **[Environment Variables Cheat Sheet](https://www.twilio.com/blog/2017/01/how-to-use-environment-variables-in-python.html)**
-    - **Purpose:** Quick reference for managing environment variables in Python projects.
+8. **[Environment Variables and Configuration Management](https://realpython.com/python-dotenv/)**
 
 ### Submit
 
