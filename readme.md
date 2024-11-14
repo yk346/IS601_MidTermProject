@@ -21,11 +21,8 @@
 3. To set up the environment variables, create a `.env` file in the project root:
 
    ```env
-   CALCULATOR_BASE_DIR=/path/to/base/dir
    CALCULATOR_MAX_HISTORY_SIZE=100
    CALCULATOR_AUTO_SAVE=true
-   CALCULATOR_PRECISION=10
-   CALCULATOR_MAX_INPUT_VALUE=1e100
    CALCULATOR_DEFAULT_ENCODING=utf-8
    ```
 
