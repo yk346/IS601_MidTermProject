@@ -39,13 +39,9 @@ Combining advanced design patterns with `pandas` empowers you to build sophistic
 
 ## Learning Outcomes
 By the end of this module, you will be able to:
-
-- **Implement Advanced Design Patterns:** Utilize design patterns such as Factory, Observer, Memento, Strategy, and Facade to create well-structured and maintainable Python applications.
-- **Integrate pandas for Data Management:** Employ the `pandas` library to efficiently handle, manipulate, and store data within your applications.
-- **Enhance Application Scalability and Flexibility:** Design applications that can easily adapt to changing requirements and scale with increased complexity.
-- **Apply the DRY Principle Effectively:** Ensure your codebase is free from unnecessary repetition, promoting maintainability and readability.
-- **Conduct Comprehensive Testing:** Write extensive unit and parameterized tests using `pytest` to ensure all aspects of your application are thoroughly tested.
-- **Achieve 100% Test Coverage:** Utilize coverage tools to measure and ensure complete test coverage, handling specific lines of code that may require coverage exceptions.
+- CLO 6: Implement object-oriented programming principles in Python.
+- CLO 7: Apply professional terminology and concepts related to web systems development.
+- CLO 8: Create and manipulate CSV files using Python.
 
 ## Module 5 Learning Pathway
 
