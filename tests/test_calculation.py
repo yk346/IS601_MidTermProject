@@ -6,6 +6,17 @@ from app.exceptions import OperationError
 import logging
 
 
+@pytest.mark.parametrize("operation, operand1, operand2, expected", [
+    ("Addition", "2", "3", "5"),
+    ("Subtraction", "5", "3", "2"),
+    ("Multiplication", "4", "2", "8"),
+    ("Division", "8", "2", "4"),
+])
+def test_operations(operation, operand1, operand2, expected):
+    calc = Calculation(operation=operation, operand1=Decimal(operand1), operand2=Decimal(operand2))
+    assert calc.result == Decimal(expected)
+
+'''
 def test_addition():
     calc = Calculation(operation="Addition", operand1=Decimal("2"), operand2=Decimal("3"))
     assert calc.result == Decimal("5")
@@ -25,6 +36,7 @@ def test_division():
     calc = Calculation(operation="Division", operand1=Decimal("8"), operand2=Decimal("2"))
     assert calc.result == Decimal("4")
 
+'''
 
 def test_division_by_zero():
     with pytest.raises(OperationError, match="Division by zero is not allowed"):
@@ -130,3 +142,13 @@ def test_from_dict_result_mismatch(caplog):
 
     # Assert
     assert "Loaded calculation result 10 differs from computed result 5" in caplog.text
+
+def test_zero_root_degree():
+    with pytest.raises(OperationError, match="Zero root is undefined"):
+        Calculation(operation="Root", operand1=Decimal("16"), operand2=Decimal("0"))
+
+def test_str_and_repr():
+    calc = Calculation("Addition", Decimal("2"), Decimal("3"))
+    assert "Addition(2, 3) = 5" in str(calc)
+    assert "Calculation(operation='Addition'" in repr(calc)
+
