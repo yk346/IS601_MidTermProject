@@ -45,6 +45,18 @@ def test_calculator_initialization(calculator):
 
 # --- Logging Tests ---
 
+@patch('app.calculator.logging.basicConfig')
+def test_logging_setup(logging_basic_config_mock, calculator):
+    # Call the method under test
+    calculator._setup_logging()
+    # Check that logging was set up correctly
+    logging_basic_config_mock.assert_called_once_with(
+        filename=str(calculator.config.log_file.resolve()),
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        force=True
+    )
+
 @patch('app.calculator.logging.info')
 def test_logging_setup(logging_info_mock):
     with patch.object(CalculatorConfig, 'log_dir', new_callable=PropertyMock) as mock_log_dir, \
@@ -250,4 +262,45 @@ def undo(self) -> bool:
 
     logging.debug(f"Undo complete: history size after undo: {len(self.history)}")
     return True
+
+def test_get_history_dataframe(calculator, add_operation):
+    calculator.set_operation(add_operation)
+    calculator.perform_operation(1, 2)
+    df = calculator.get_history_dataframe()
+    assert isinstance(df, pd.DataFrame)
+    assert df.shape[0] == 1
+    assert df.iloc[0]['operation'] == 'Addition'
+
+def test_show_history_format(calculator, add_operation):
+    calculator.set_operation(add_operation)
+    calculator.perform_operation(4, 5)
+    history_output = calculator.show_history()
+    assert isinstance(history_output, list)
+    assert "Addition(4, 5) = 9" in history_output[0]
+
+@patch('app.calculator.pd.DataFrame.to_csv', side_effect=Exception("Disk full"))
+def test_save_history_failure(mock_to_csv, calculator):
+    with pytest.raises(OperationError, match="Failed to save history"):
+        calculator.set_operation(OperationFactory.create_operation("add"))
+        calculator.perform_operation(1, 1)
+        calculator.save_history()
+
+@patch('app.calculator.pd.read_csv', side_effect=Exception("Corrupt file"))
+@patch('app.calculator.Path.exists', return_value=True)
+def test_load_history_failure(mock_exists, mock_read_csv, calculator):
+    with pytest.raises(OperationError, match="Failed to load history"):
+        calculator.load_history()
+
+def test_redo_stack_cleared_after_new_operation(calculator, add_operation):
+    calculator.set_operation(add_operation)
+    calculator.perform_operation(1, 1)
+    calculator.undo()
+    assert len(calculator.redo_stack) == 1
+    calculator.perform_operation(2, 2)
+    assert len(calculator.redo_stack) == 0  # Redo stack should be cleared
+
+@patch('app.calculator.pd.DataFrame.to_csv')
+def test_save_empty_history(mock_to_csv, calculator):
+    calculator.save_history()
+    mock_to_csv.assert_called_once()
 
