@@ -304,3 +304,81 @@ def test_save_empty_history(mock_to_csv, calculator):
     calculator.save_history()
     mock_to_csv.assert_called_once()
 
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (10, 3, Decimal('1')),
+        (25, 7, Decimal('4'))
+    ]
+)
+def test_perform_operation_modulus(calculator, a, b, expected):
+    op = OperationFactory.create_operation('modulus')
+    calculator.set_operation(op)
+    result = calculator.perform_operation(a, b)
+    assert result == expected
+
+def test_modulus_division_by_zero(calculator):
+    op = OperationFactory.create_operation('modulus')
+    calculator.set_operation(op)
+    with pytest.raises(OperationError, match="Division by zero in modulus"):
+        calculator.perform_operation(10, 0)
+
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (10, 3, Decimal('3')),
+        (25, 4, Decimal('6')),
+        (9, 2, Decimal('4')),
+        (5, 5, Decimal('1')),
+        (10, -3, Decimal('-4')),
+        (-10, 3, Decimal('-4'))
+    ]
+)
+def test_perform_operation_integer_division(calculator, a, b, expected):
+    op = OperationFactory.create_operation('intdivision')
+    calculator.set_operation(op)
+    result = calculator.perform_operation(a, b)
+    assert result == expected
+
+def test_integer_division_by_zero(calculator):
+    op = OperationFactory.create_operation('intdivision')
+    calculator.set_operation(op)
+    with pytest.raises(OperationError, match="Division by zero in integer division"):
+        calculator.perform_operation(10, 0)
+
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (25, 100, Decimal('25.00')),
+        (50, 200, Decimal('25.00')),
+        (3, 12, Decimal('25.00')),       # (3/12)*100 = 25.00
+        (1, 3, Decimal('33.33')),        # (1/3)*100 ≈ 33.33333 → 33.33
+        (2, 3, Decimal('66.67')),        # (2/3)*100 ≈ 66.66666 → 66.67
+    ]
+)
+def test_perform_operation_percentage(calculator, a, b, expected):
+    op = OperationFactory.create_operation('percentage')
+    calculator.set_operation(op)
+    result = calculator.perform_operation(a, b)
+    assert result == expected
+
+def test_percentage_division_by_zero(calculator):
+    op = OperationFactory.create_operation('percentage')
+    calculator.set_operation(op)
+    with pytest.raises(OperationError):
+        calculator.perform_operation(1, 0)
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (10, 4, Decimal('6')),
+        (4, 10, Decimal('6')),
+        (Decimal('3.5'), Decimal('7.8'), Decimal('4.3')),
+        (-2, 5, Decimal('7')),
+    ]
+)
+def test_absolute_difference_operation(calculator, a, b, expected):
+    op = OperationFactory.create_operation('absdifference')
+    calculator.set_operation(op)
+    result = calculator.perform_operation(a, b)
+    assert result == expected

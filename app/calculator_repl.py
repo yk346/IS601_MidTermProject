@@ -36,7 +36,10 @@ def calculator_repl():
                 if command == 'help':
                     # Display available commands
                     print("\nAvailable commands:")
-                    print("  add, subtract, multiply, divide, power, root - Perform calculations")
+                    print("  add, subtract, multiply, divide, power, root, modulus - Perform calculations")
+                    print("  intdivision - Perform division that results in an integer quotient, discarding any fractional part. Performs floor division, meaning it always rounds down to the nearest lower integer (toward negative infinity)")
+                    print("  percentage - Calculate the percentage of one number with respect to another. Round to 2-nd decimal place")
+                    print("  absdifference - Calculate the absolute difference between two numbers")
                     print("  history - Show calculation history")
                     print("  clear - Clear calculation history")
                     print("  undo - Undo the last calculation")
@@ -107,7 +110,7 @@ def calculator_repl():
                         print(f"Error loading history: {e}")
                     continue
 
-                if command in ['add', 'subtract', 'multiply', 'divide', 'power', 'root']:
+                if command in ['add', 'subtract', 'multiply', 'divide', 'power', 'root', 'modulus', 'intdivision', 'percentage', 'absdifference']:
                     # Perform the specified arithmetic operation
                     try:
                         print("\nEnter numbers (or 'cancel' to abort):")

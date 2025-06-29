@@ -65,7 +65,14 @@ class Calculation:
                 Decimal(pow(float(x), 1 / float(y))) 
                 if x >= 0 and y != 0 
                 else self._raise_invalid_root(x, y)
-            )
+            ),
+            "Modulus": lambda x, y: x % y if y != 0 else self._raise_div_zero(),
+            #"IntDivision": lambda x, y: Decimal(int(x // y)) if y != 0 else self._raise_div_zero(),
+            "IntDivision": lambda x, y: x // y if y != 0 else self._raise_div_zero(),
+            #"Percentage": lambda x, y: (x / y) * Decimal(100) if y != 0 else self._raise_div_zero(),
+            "Percentage": lambda x, y: ((x / y) * Decimal(100)).quantize(Decimal("0.01")) if y != 0 else self._raise_div_zero(),
+            "AbsoluteDifference": lambda x, y: abs(x - y),
+
         }
 
         # Retrieve the operation function based on the operation name

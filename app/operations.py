@@ -3,9 +3,11 @@
 ########################
 
 from abc import ABC, abstractmethod
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from typing import Dict
 from app.exceptions import ValidationError
+from app.exceptions import OperationError
+import math
 
 
 class Operation(ABC):
@@ -248,6 +250,42 @@ class Root(Operation):
         self.validate_operands(a, b)
         return Decimal(pow(float(a), 1 / float(b)))
 
+class Modulus(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        if b == 0:
+            raise OperationError("Division by zero in modulus")
+        return a % b
+
+    def __str__(self):
+        return "Modulus"
+
+class IntDivision(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        if b == 0:
+            raise OperationError("Division by zero in integer division")
+        #return Decimal(a) // Decimal(b)
+        result = math.floor(float(a) / float(b))
+        return Decimal(result)
+
+    def __str__(self):
+        return "IntDivision"
+
+class Percentage(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        if b == 0:
+            raise OperationError("Cannot calculate percentage with denominator zero")
+        result = (a / b) * Decimal(100)
+        return result.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
+    def __str__(self):
+        return "Percentage"
+
+class AbsoluteDifference(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        return abs(a - b)
+
+    def __str__(self):
+        return "AbsoluteDifference"
 
 class OperationFactory:
     """
@@ -265,7 +303,11 @@ class OperationFactory:
         'multiply': Multiplication,
         'divide': Division,
         'power': Power,
-        'root': Root
+        'root': Root,
+        'modulus': Modulus,
+        'intdivision': IntDivision,
+        'percentage': Percentage,
+        'absdifference': AbsoluteDifference
     }
 
     @classmethod
