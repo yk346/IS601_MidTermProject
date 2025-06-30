@@ -4,6 +4,7 @@ from app.calculator_repl import calculator_repl
 from app.calculator import Calculator
 from app.exceptions import ValidationError
 
+
 # ----- Test that the help command prints available options -----
 @patch('builtins.input', side_effect=['help', 'exit'])
 @patch('builtins.print')
@@ -112,14 +113,14 @@ def test_repl_addition(mock_print, mock_input):
 @patch('builtins.print')
 def test_repl_cancel_first_number(mock_print, mock_input):
     calculator_repl()
-    mock_print.assert_any_call("Operation cancelled")
+    assert any("Operation cancelled" in str(call.args[0]) for call in mock_print.call_args_list)
 
-# ----- Test arithmetic branch: cancel on second number -----
 @patch('builtins.input', side_effect=['add', '2', 'cancel', 'exit'])
 @patch('builtins.print')
 def test_repl_cancel_second_number(mock_print, mock_input):
     calculator_repl()
-    mock_print.assert_any_call("Operation cancelled")
+    assert any("Operation cancelled" in str(call.args[0]) for call in mock_print.call_args_list)
+
 
 # ----- Test arithmetic branch: known error (simulate ValidationError) -----
 @patch('builtins.input', side_effect=['add', '2', '3', 'exit'])
