@@ -10,7 +10,6 @@ A powerful command-line calculator built with Python that supports dynamic opera
 - Undo/Redo previous calculations
 - Save/load calculation history
 - Color-coded user interface with `colorama`
-- Dynamic help menu using the **Decorator Design Pattern**
 - Extensible via **Factory Pattern** for operations
 - Logging and automatic history persistence
 - Unit tested with support for test coverage
@@ -45,4 +44,7 @@ exit            Exit the calculator
 
 ```bash
 git clone https://github.com/yk346/IS601_MidTermProject.git
-cd IS601_MidTermProject
+
+### 2. Run the calculator
+cd IS601_MidTermProject #go to the cloned folder
+python3 main.py # run the calculator app
