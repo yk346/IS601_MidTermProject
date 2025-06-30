@@ -40,11 +40,11 @@ exit            Exit the calculator
 
 ## 🛠️ Installation
 
-### 1. Clone the repository
+### Clone the repository and run the calculator
 
 ```bash
 git clone https://github.com/yk346/IS601_MidTermProject.git
 
-### 2. Run the calculator
+### Run the calculator
 cd IS601_MidTermProject #go to the cloned folder
 python3 main.py # run the calculator app
