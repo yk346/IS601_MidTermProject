@@ -18,25 +18,25 @@ A powerful command-line calculator built with Python that supports dynamic opera
 
 💡 Supported Commands:
 
-add             Add two numbers
-subtract        Subtract two numbers
-multiply        Multiply two numbers
-divide          Divide one number by another
-power           Raise one number to the power of another
-root            Take the nth root of a number
-modulus         Modulo operation (a % b)
-intdivision     Floor division (rounds down)
-percentage      (a / b) * 100 rounded to 2 decimals
-absdifference   Absolute difference between numbers
+- add             Add two numbers
+- subtract        Subtract two numbers
+- multiply        Multiply two numbers
+- divide          Divide one number by another
+- power           Raise one number to the power of another
+- root            Take the nth root of a number
+- modulus         Modulo operation (a % b)
+- intdivision     Floor division (rounds down)
+- percentage      (a / b) * 100 rounded to 2 decimals
+- absdifference   Absolute difference between numbers
 
-history         Show previous calculations
-undo            Undo last operation
-redo            Redo last undone operation
-save            Save current history
-load            Load saved history
-clear           Clear entire history
-help            Show all available commands
-exit            Exit the calculator
+- history         Show previous calculations
+- undo            Undo last operation
+- redo            Redo last undone operation
+- save            Save current history
+- load            Load saved history
+- clear           Clear entire history
+- help            Show all available commands
+- exit            Exit the calculator
 
 ## 🛠️ Installation
 
